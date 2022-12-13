@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../index.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="header">
+            <h1>
+                To-Do List
+            </h1>
+            <button onclick="getTasks()">Get Tasks</button>
+        </div>
+        <div id="task-list">
+        </div>
+        <div id="post-form">
+            <form action="../index.js" method="post">
+                <input id="title" type="text" placeholder="Enter Title">
+                <input id="description" type="text" placeholder="Enter description">
+                <button > Create Task </button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const getTasks = () => {
+    var url = "http://localhost:5000/show-tasks"
+    fetch(url).then((res)=>{
+        return res.json();
+    }).then((res)=>{
+        let target = document.getElementById("task-list");
+        target.innerHTML = "";
+       res.map((val)=>{
+        target.innerHTML = target.innerHTML + `<div class="task"> 
+                <p class="title"> ${val.title} </p>
+                <p class="desc"> ${val.description} </p>
+            </div>`;
+       })
+    })
+}
+    </script>
+</body>
+</html>
